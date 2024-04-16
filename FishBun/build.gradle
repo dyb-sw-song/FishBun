@@ -57,7 +57,7 @@ android {
 
 apply plugin: "io.github.sabujak-sabujak"
 
-apply from: '../publish/release.gradle'
+//apply from: '../publish/release.gradle'
 
 unMock {
     keep "android.net.Uri"

@@ -11,10 +11,12 @@ import android.text.style.ForegroundColorSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.Group
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -59,10 +61,30 @@ class AlbumActivity : BaseActivity(),
     private var adapter: AlbumListAdapter? = null
     private var txtAlbumMessage: TextView? = null
 
+    fun windowSystemBarsColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //window.setStatusBarColor(ContextCompat.getColor(this, R.color.app))
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.nor))
+            // If true, status bar icon color will be changed to black.
+            val decor = window.decorView
+            val shouldChangeStatusBarTintToDark = true
+            if (shouldChangeStatusBarTintToDark) {
+                decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                // We want status bar icon to be white color, so clear the flag
+                decor.systemUiVisibility = 0
+            }
+        }
+    }
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_album)
         initView()
+        windowSystemBarsColor()
         albumPresenter.getDesignViewData()
         if (checkPermission()) albumPresenter.loadAlbumList()
     }

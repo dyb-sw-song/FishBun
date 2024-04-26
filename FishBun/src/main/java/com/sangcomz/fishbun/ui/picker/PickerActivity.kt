@@ -16,7 +16,9 @@ import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -94,11 +96,29 @@ class PickerActivity : BaseActivity(),
             Log.d(TAG, e.toString())
         }
     }
-
+    fun windowSystemBarsColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //window.setStatusBarColor(ContextCompat.getColor(this, R.color.app))
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.nor))
+            // If true, status bar icon color will be changed to black.
+            val decor = window.decorView
+            val shouldChangeStatusBarTintToDark = true
+            if (shouldChangeStatusBarTintToDark) {
+                decor.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                // We want status bar icon to be white color, so clear the flag
+                decor.systemUiVisibility = 0
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_photo_picker)
         initView()
+        windowSystemBarsColor()
         if (checkPermission()) pickerPresenter.getPickerListItem()
     }
 

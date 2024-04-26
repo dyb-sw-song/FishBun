@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="nor">#F7F8F9</color>
+    <color name="picker_circle_stroke">#FFFFFF</color>
+    <color name="picker_circle_fill">#2297FF</color>
+    <color name="picker_circle_font">#FFFFFF</color>
 </resources>

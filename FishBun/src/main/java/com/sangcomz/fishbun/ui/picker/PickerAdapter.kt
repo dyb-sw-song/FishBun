@@ -129,9 +129,17 @@ class PickerAdapter(
 
             btnThumbCount.run {
                 unselect()
-                setCircleColor(viewData.colorActionBar)
+                val fill = ContextCompat.getColor(context, R.color.picker_circle_fill)
+                val font = ContextCompat.getColor(context, R.color.picker_circle_font)
+                val stroke = ContextCompat.getColor(context, R.color.picker_circle_stroke)
+
+                /*setCircleColor(viewData.colorActionBar)
                 setTextColor(viewData.colorActionBarTitle)
-                setStrokeColor(viewData.colorSelectCircleStroke)
+                setStrokeColor(viewData.colorSelectCircleStroke)*/
+                setCircleColor(fill)
+                setTextColor(font)
+                setStrokeColor(stroke)
+
             }
 
             initState(item.selectedIndex, viewData.maxCount == 1)
@@ -164,7 +172,7 @@ class PickerAdapter(
         private fun animScale(view: View, isSelected: Boolean, isAnimation: Boolean) {
             var duration = 200
             if (!isAnimation) duration = 0
-            val toScale: Float = if (isSelected) .8f else 1.0f
+            val toScale: Float = if (isSelected) .9f else 1.0f
             ViewCompat.animate(view)
                 .setDuration(duration.toLong())
                 .scaleX(toScale)
@@ -174,7 +182,7 @@ class PickerAdapter(
         }
 
         private fun setScale(view: View, isSelected: Boolean) {
-            val toScale: Float = if (isSelected) .8f else 1.0f
+            val toScale: Float = if (isSelected) .9f else 1.0f
             view.scaleX = toScale
             view.scaleY = toScale
         }

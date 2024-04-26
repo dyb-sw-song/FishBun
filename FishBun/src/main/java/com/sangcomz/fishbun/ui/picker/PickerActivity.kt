@@ -8,8 +8,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -177,6 +180,7 @@ class PickerActivity : BaseActivity(),
         menuInflater.inflate(R.menu.menu_photo_album, menu)
         val menuDoneItem = menu.findItem(R.id.action_done)
         val menuAllDoneItem = menu.findItem(R.id.action_all_done)
+
         pickerPresenter.getPickerMenuViewData {
             if (it.drawableDoneButton != null) {
                 menuDoneItem.icon = it.drawableDoneButton
@@ -189,6 +193,13 @@ class PickerActivity : BaseActivity(),
                         spanString.length,
                         0
                     ) //fi
+
+                    val textSizeInSp = 18 // 원하는 텍스트 크기를 sp 단위로 설정
+                    val textSizeInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+                        textSizeInSp.toFloat(), resources.displayMetrics)
+                    spanString.setSpan(AbsoluteSizeSpan(textSizeInPx.toInt()), 0, spanString.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+                    menuDoneItem.title = spanString
+
                     menuDoneItem.title = spanString
                 } else {
                     menuDoneItem.title = it.strDoneMenu

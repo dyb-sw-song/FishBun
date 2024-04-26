@@ -5,5 +5,6 @@ enum class MimeType(val type: String) {
     PNG("image/png"),
     JPEG("image/jpeg"),
     BMP("image/bmp"),
-    WEBP("image/webp");
+    WEBP("image/webp"),
+    HEIF("image/heif");
 }

@@ -87,16 +87,16 @@ class WithActivityActivity : AppCompatActivity() {
                         .setMinCount(3)
                         .setPickerSpanCount(5)
                         .setActionBarColor(
-                            Color.parseColor("#795548"),
-                            Color.parseColor("#5D4037"),
+                            Color.parseColor("#ffffff"),
+                            Color.parseColor("#ffffff"),
                             false
                         )
-                        .setActionBarTitleColor(Color.parseColor("#ffffff"))
+                        .setActionBarTitleColor(Color.parseColor("#000000"))
                         .setSelectedImages(path)
                         .setAlbumSpanCount(2, 3)
                         .setButtonInAlbumActivity(false)
                         .hasCameraInPickerPage(true)
-                        .exceptMimeType(arrayListOf(MimeType.GIF))
+                        .exceptMimeType(arrayListOf(MimeType.GIF,MimeType.HEIF))
                         .setReachLimitAutomaticClose(true)
                         .setHomeAsUpIndicatorDrawable(
                             ContextCompat.getDrawable(
@@ -104,12 +104,14 @@ class WithActivityActivity : AppCompatActivity() {
                                 R.drawable.ic_custom_back_white
                             )
                         )
-                        .setDoneButtonDrawable(
+                        /*.setDoneButtonDrawable(
                             ContextCompat.getDrawable(
                                 this,
                                 R.drawable.ic_custom_ok
                             )
-                        )
+                        )*/
+                        .setMenuDoneText("업로드")
+                        .setMenuTextColor(Color.parseColor("#2297FF"))
                         .setAllViewTitle("All")
                         .setActionBarTitle("FishBun Dark")
                         .textOnNothingSelected("Please select three or more!")
